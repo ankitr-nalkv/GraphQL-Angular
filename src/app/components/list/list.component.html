@@ -1,2 +1,7 @@
 <p>list works!</p>
-<gui-grid [columns]="columns" [source]="source"> </gui-grid>
+<ag-grid-angular 
+    style="width: 700px; height: 500px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs">
+</ag-grid-angular>
