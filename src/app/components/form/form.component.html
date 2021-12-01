@@ -1,3 +1,45 @@
-<p>
-form works!
-</p>
+<div class="container">
+    <div class="row">
+        Incident: {{formId}}
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="id"> Id:
+                        <input class="form-control" type="text" id="id" formControlName="id">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="subject"> Subject:
+                        <input class="form-control" type="text" id="subject" formControlName="subject">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="owner">Owner:
+                        <input class="form-control" type="text" id="owner" formControlName="owner">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:
+                        <textarea [rows]="3" [cols]="100" class="form-control" type="text" id="description" formControlName="description"></textarea>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="keywords">Keywords:
+                        <input class="form-control" type="text" id="keywords" formControlName="keywords">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="link">Link:
+                        <input class="form-control" type="text" id="link" formControlName="link">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="!form.valid || !form.dirty "
+                        class="btn btn-success note-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

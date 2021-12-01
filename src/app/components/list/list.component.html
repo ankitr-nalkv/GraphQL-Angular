@@ -2,6 +2,8 @@
 <ag-grid-angular 
     style="width: 700px; height: 500px;" 
     class="ag-theme-balham"
-    [rowData]="rowData" 
-    [columnDefs]="columnDefs">
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [rowSelection]="'single'"
+    (selectionChanged)="onSelectionChanged($event)">
 </ag-grid-angular>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
+import { FetchListService } from 'src/app/services/fetch-list.service';
 
 @Component({
   selector: 'app-list',
@@ -16,30 +18,22 @@ export class ListComponent implements OnInit {
   ];
 
   rowData = [];
-  constructor(private apollo: Apollo) { }
+  constructor(
+    private listService: FetchListService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
-    this.apollo
-      .watchQuery({
-        query: gql`
-        {
-          incidents {
-            subject
-            owner
-            description
-            keywords
-            link
-          }
-        }
-        `,
-        variables: {
-          "courseID": 1
-        }
-      })
-      .valueChanges.subscribe((result: any) => {
+    this.listService.getAllIncidents().subscribe((result: any) => {
         console.log(result['data']['incidents']);
 
         this.rowData = result['data']['incidents'];
       });
+  }
+
+  onSelectionChanged(rowData: any) {
+    const {id} =  rowData.api.getSelectedRows()[0];
+    this.router.navigate(['form/'+ id]);
+    debugger;
   }
 }
