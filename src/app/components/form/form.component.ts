@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IncidentType } from 'src/app/interfaces/incident.interface';
 import { FetchListService } from 'src/app/services/fetch-list.service';
 
 @Component({
@@ -39,4 +40,13 @@ export class FormComponent implements OnInit {
     })
   }
 
+  saveIncident(payload: IncidentType) {
+    this.listService.updateIncident(payload.id, payload)
+    .subscribe((data: any) => {
+      const dataUpdated = data['data']['updateIncident'];
+      console.log(data['data']['updateIncident']);
+      
+      this.form.patchValue(dataUpdated);
+    });
+  }
 }

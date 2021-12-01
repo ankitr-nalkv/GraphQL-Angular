@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6">
-            <form [formGroup]="form">
+            <form [formGroup]="form" (ngSubmit)="saveIncident(form.value)">
                 <div class="form-group">
                     <label for="id"> Id:
                         <input class="form-control" type="text" id="id" formControlName="id">
