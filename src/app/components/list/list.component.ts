@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
 
 @Component({
   selector: 'app-list',
@@ -7,17 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
   columnDefs = [
-    {headerName: 'Make', field: 'make'},
-    {headerName: 'Model', field: 'model'},
-    {headerName: 'Price', field: 'price'}
-];
+    { headerName: 'Subject', field: 'subject' },
+    { headerName: 'Owner', field: 'owner' },
+    { headerName: 'Description', field: 'description' },
+    { headerName: 'Keywords', field: 'keywords' },
+    { headerName: 'Link', field: 'link' },
+  ];
 
-rowData = [
-    {make: 'Toyota', model: 'Celica', price: 35000},
-    {make: 'Ford', model: 'Mondeo', price: 32000},
-    {make: 'Porsche', model: 'Boxter', price: 72000}
-];
-  constructor() {}
+  rowData = [];
+  constructor(private apollo: Apollo) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.apollo
+      .watchQuery({
+        query: gql`
+        {
+          incidents {
+            subject
+            owner
+            description
+            keywords
+            link
+          }
+        }
+        `,
+        variables: {
+          "courseID": 1
+        }
+      })
+      .valueChanges.subscribe((result: any) => {
+        console.log(result['data']['incidents']);
+
+        this.rowData = result['data']['incidents'];
+      });
+  }
 }
