@@ -12,6 +12,7 @@ import { FetchListService } from 'src/app/services/fetch-list.service';
 export class FormComponent implements OnInit {
   form: any;
   formId = '';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -45,8 +46,8 @@ export class FormComponent implements OnInit {
     .subscribe((data: any) => {
       const dataUpdated = data['data']['updateIncident'];
       console.log(data['data']['updateIncident']);
-      
       this.form.patchValue(dataUpdated);
+      alert('Saved Successfully');
     });
   }
 }

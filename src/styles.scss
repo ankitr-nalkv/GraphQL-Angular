@@ -1,3 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "ag-grid-community/dist/styles/ag-grid.css";
 @import "ag-grid-community/dist/styles/ag-theme-balham.css";
+
+.ag-theme-balham [class^="ag-"],
+.ag-theme-balham [class^="ag-"]:focus,
+.ag-theme-balham [class^="ag-"]:after,
+.ag-theme-balham [class^="ag-"]:before {
+  font-size: 1rem;
+}

@@ -2,14 +2,6 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { IncidentType } from '../interfaces/incident.interface';
 
-const UPVOTE_POST = gql`
-  mutation UpvotePost($postId: Int!) {
-    upvotePost(postId: $postId) {
-      id
-      votes
-    }
-  }
-`;
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +19,18 @@ export class FetchListService {
           description
           keywords
           link
+        }
+      }`
+    }).valueChanges;
+  }
+
+  getAllIncidentsForMobil(): any {
+    return this.apollo.watchQuery({
+      query: gql`{
+        incidents {
+          id
+          subject
+          description
         }
       }`
     }).valueChanges;
